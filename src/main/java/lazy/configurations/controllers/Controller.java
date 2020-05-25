@@ -4,7 +4,7 @@ import lazy.database.connectors.DogRepository;
 import lazy.database.connectors.HumanRepository;
 import lazy.database.entities.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +25,11 @@ public class Controller {
     private DogRepository dogRepository;
 
     @Autowired
-    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private TaskExecutor taskExecutor;
 
     @GetMapping("/")
     public String logic() {
-        threadPoolTaskExecutor.execute(() -> {
+        taskExecutor.execute(() -> {
             try {
                 Thread.sleep(5000);
                 addDefaultDogToAllHumans();
