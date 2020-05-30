@@ -2,7 +2,9 @@ package lazy.configurations.controllers;
 
 import lazy.database.connectors.DogRepository;
 import lazy.database.connectors.HumanRepository;
+import lazy.database.entities.Human;
 import lazy.services.AsyncTransactionService;
+import lazy.services.SecondService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +21,9 @@ public class Controller {
     private AsyncTransactionService service;
 
     @Autowired
+    private SecondService service2;
+
+    @Autowired
     private TaskExecutor taskExecutor;
 
     @Autowired
@@ -29,14 +34,15 @@ public class Controller {
 
     @GetMapping("/")
     public String logic() {
-        taskExecutor.execute(() -> {
             try {
-                Thread.sleep(5000);
-                service.addDefaultDogToAllHumans(humanRepository, dogRepository);
+                service.addDefaultDogToAllHumans();
             } catch (Exception e) {
-                e.printStackTrace();
             }
-        });
         return "Request received!";
+    }
+
+    @GetMapping("/update")
+    public String update() {
+        return service2.changeName();
     }
 }

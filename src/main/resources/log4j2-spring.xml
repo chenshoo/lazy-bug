@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration packages="foundation.layout">
+    <Appenders>
+
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{white} [%t] %style{%-5level}{blue} %logger{36} - %style{%msg%n}{white}"/>
+            <!--            <FoundationConsoleLayout/>-->
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- TODO: Debug? -->
+        <!-- TODO: Have 2 log4js dev/prod -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <!--            <AppenderRef ref="AsyncElkLogs"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
